@@ -1,49 +1,41 @@
-# Gestión de banderillas coreanas
+# Gestión de Banderillas Coreanas
 
-Aplicación de escritorio local hecha con Python, Tkinter y SQLite. No requiere instalar paquetes externos. La base activa se guarda fuera del proyecto, en `%USERPROFILE%\BanderillasCoreanas\banderillas.sqlite3`.
+Sistema de gestión desarrollado en Python para administrar un emprendimiento de venta de banderillas coreanas desde una aplicación de escritorio.
 
-## Ejecutar en Windows
+Permite organizar los productos, controlar los ingredientes disponibles, registrar las ventas y los gastos, gestionar la caja y consultar los resultados del negocio desde una sola aplicación.
 
-1. Instalar Python 3 desde python.org y marcar **Add Python to PATH** durante la instalación. Tkinter debe quedar incluido.
-2. Abrir VS Code y elegir **Archivo > Abrir carpeta**; seleccionar `banderillas_app`.
-3. Abrir una terminal en VS Code y ejecutar:
+## Funcionalidades
 
-   ```powershell
-   py app.py
-   ```
+- **Gestión de productos e ingredientes:** registrar productos terminados, materias primas y sus existencias.
+- **Control de recetas:** definir los ingredientes y las cantidades necesarias para elaborar cada producto.
+- **Producción:** registrar la fabricación de productos y descontar automáticamente los ingredientes utilizados.
+- **Compras:** registrar la adquisición de materias primas y actualizar sus costos.
+- **Ventas:** registrar ventas, controlar el stock y dividir los pagos entre distintos medios de cobro.
+- **Caja:** gestionar aperturas, cierres, gastos, egresos y retiros de dinero.
+- **Control de costos:** calcular costos de productos y conservar el costo registrado al momento de cada venta.
+- **Informes:** consultar información del negocio y exportar datos a archivos CSV.
+- **Copias de seguridad:** crear respaldos de la base de datos y restaurarlos cuando sea necesario.
+- **Alertas de stock:** identificar ingredientes o productos que necesitan reposición.
 
-La primera ejecución crea automáticamente la base de datos. Para cerrar, cerrar la ventana como cualquier aplicación.
+## Tecnologías utilizadas
 
-## Uso sugerido
+- Python
+- Tkinter para la interfaz gráfica.
+- SQLite para almacenar la información.
+- CSV para exportar informes.
 
-1. Cargar productos y luego ingredientes en las pestañas correspondientes.
-2. Definir cada receta en **Recetas y producción**, usando los IDs visibles en las tablas.
-3. Registrar compras y fabricar productos. La fabricación verifica ingredientes disponibles.
-4. Abrir caja antes de operar. Registrar ventas con pagos separados por `;`, por ejemplo `Efectivo=1200;Transferencia=500`. Los pagos deben sumar exactamente el total de la venta.
-5. Registrar gastos, egresos y retiros desde sus pestañas.
-6. Consultar informes y generar respaldos periódicos.
+## Almacenamiento de datos
 
-Los campos de importes aceptan números decimales, por ejemplo `1250.50` (también `1250,50`). Las unidades de ingredientes son texto libre, por ejemplo `g`, `ml` o `unidad`.
+La aplicación guarda la información en una base de datos local, ubicada fuera de la carpeta del proyecto. Esto permite conservar los registros aunque se mueva o actualice el código de la aplicación.
 
-## Reglas implementadas
+Se recomienda realizar copias de seguridad periódicas y probar el sistema con datos ficticios antes de comenzar a utilizarlo en el negocio.
 
-- Importes almacenados en centavos enteros.
-- Conexiones con claves foráneas, consultas parametrizadas y transacciones SQLite.
-- Ventas con uno o más medios de pago, validación de suma y control de stock; cancelación trazable que repone producto.
-- Producción con consumo de receta dentro de una operación atómica.
-- Compras con costo promedio ponderado para ingredientes y productos terminados; cada venta conserva el costo unitario utilizado.
-- Movimientos de compras, ventas, producción, ajustes y cancelaciones.
-- Alertas de stock mínimo, gastos, apertura/cierre de caja e informes con exportación CSV separado por punto y coma y codificación compatible con Excel.
-- Copia mediante la API de respaldo SQLite; antes de restaurar se valida la integridad y se crea una copia preventiva.
+## Alcance del proyecto
 
-## Respaldo y restauración
+Es una aplicación local diseñada para utilizarse en una computadora y por un usuario a la vez. Está orientada a facilitar la organización cotidiana del emprendimiento y el seguimiento de sus movimientos.
 
-Usar **Crear respaldo SQLite** desde la pestaña **Informes y copias** y guardar la copia en otra unidad o servicio seguro. Para restaurar, elegir la copia desde esa misma pestaña y confirmar. La aplicación conserva además una copia preventiva en la carpeta de datos antes del reemplazo. Cerrá cualquier otra instancia del programa antes de restaurar.
+Los resultados económicos son estimaciones de gestión y no reemplazan la contabilidad profesional ni las obligaciones fiscales.
 
-## Git
+## Estado del proyecto
 
-Inicializar Git desde VS Code en esta carpeta. `.gitignore` evita incluir bases locales y exports. No subir datos de ventas o clientes al repositorio.
-
-## Alcance actual
-
-La aplicación está pensada para una computadora y un usuario a la vez. La caja y los pagos están orientados a un cierre de caja sencillo; el resultado de informes es estimado y no reemplaza asesoramiento contable o fiscal. Los IDs se muestran para facilitar configurar recetas desde la interfaz. Antes de usar datos reales, cargar registros ficticios y practicar creación y restauración de una copia.
+Primera versión funcional en desarrollo, con herramientas para administrar productos, ingredientes, producción, ventas, caja e informes.
